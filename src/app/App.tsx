@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import api from "./api";
+
+import api from "../api/api";
 const HOUR = 1000 * 60 * 60;
 function App() {
   const [actAgent, setActAgent] = useState<any>();

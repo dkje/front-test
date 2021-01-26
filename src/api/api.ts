@@ -68,5 +68,6 @@ const getOpenApi = (type: keyof typeof OPEN_API) => async (
 
 const spot = getOpenApi("");
 const series = getOpenApi("json");
+const api = { spot, series };
 
-export default { spot, series };
+export default api;
