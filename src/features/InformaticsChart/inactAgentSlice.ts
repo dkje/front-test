@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
 import { createThunkReducers } from "../../common/utils/fetchStateUtils";
-import { SpotInitialState } from "../type";
+import { SpotResponseState } from "../type";
 
-export const spotInitialState: SpotInitialState = {
+export const spotInitialState: SpotResponseState = {
   error: null,
   data: null,
   loading: false,
