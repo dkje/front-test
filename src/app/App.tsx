@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import api from "../api/api";
 import InformaticsChart from "../features/InformaticsChart/InformaticsChart";
+import RacingBarChartWrapper from "../features/RacingBarChart/RacingBarChartWrapper";
 const HOUR = 1000 * 60 * 60;
 function App() {
   const [actAgent, setActAgent] = useState<any>();
@@ -20,6 +21,7 @@ function App() {
   return (
     <div style={{ padding: 20 }}>
       <InformaticsChart />
+      <RacingBarChartWrapper />
       <h2>프로젝트 API 예시</h2>
       <h3>Spot 정보 조회 URL</h3>
       <pre>{JSON.stringify(actAgent, null, 4)}</pre>

@@ -4,7 +4,7 @@ export interface SpotResponse {
   data: string;
 }
 
-export interface SpotInitialState {
+export interface SpotResponseState {
   loading: boolean;
   error: null | string;
   data: null | SpotResponse;
