@@ -15,11 +15,11 @@ export const paddings = {
 };
 
 export const fontSize = {
-  sm: "1.4rem",
-  base: "1.6rem",
-  lg: "2rem",
-  xl: "2.5rem",
-  title: "6rem",
+  sm: "0.7rem",
+  base: "1rem",
+  lg: "1.6rem",
+  xl: "2rem",
+  title: "3rem",
 };
 
 export const fontFamily = {
