@@ -1,4 +1,17 @@
-svg {
-  width: 100%;
-  heihgt: 100%;
+.racing_chart_container {
+  svg {
+    overflow: visible;
+    width: 100%;
+    heihgt: 100%;
+  }
+
+  .bar {
+    fill: orange;
+    cursor: pointer;
+  }
+
+  .label {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.7rem;
+  }
 }
