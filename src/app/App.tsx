@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div style={{ padding: 20 }}>
-      <InformaticsChart />
+      {/* <InformaticsChart /> */}
       <RacingBarChartWrapper />
       <h2>프로젝트 API 예시</h2>
       <h3>Spot 정보 조회 URL</h3>
