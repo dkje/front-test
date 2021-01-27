@@ -17,7 +17,6 @@ const RacingBarChart: React.FC<{ activeStatus: TypeOfActiveStatus[] }> = ({
 
   useEffect(() => {
     if (!dimensions) return;
-    console.log("------activeStatus:", activeStatus);
     const { width, height } = dimensions;
     const svg = select(svgRef.current);
 
@@ -30,6 +29,7 @@ const RacingBarChart: React.FC<{ activeStatus: TypeOfActiveStatus[] }> = ({
       .domain([0, Math.max(...activeStatus.map((el) => el.value)) * 1.1])
       .range([0, width]);
 
+    // 기존 세로축이 있었다면 삭제 후 다시 세로축을 작성
     const yAxis = axisLeft(yScale);
     svg.selectAll(".yAxis").remove();
     svg
