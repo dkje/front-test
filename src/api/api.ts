@@ -39,6 +39,7 @@ const OPEN_API: OPEN_API_IFC = {
     "exception/{stime}/{etime}": "Exception 발생 ",
   },
 };
+
 const getPath = (url: string, param: Record<string, any> = {}) => {
   let path = url;
   for (let key in param) {
