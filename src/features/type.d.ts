@@ -1,5 +1,5 @@
 export interface SpotData<T> {
-  key: keyof T;
+  key: T;
   name: string;
   data: number;
 }

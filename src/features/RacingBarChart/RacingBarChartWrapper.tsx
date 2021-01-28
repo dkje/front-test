@@ -4,29 +4,41 @@ import { useDispatch, useSelector } from "react-redux";
 import BorderConatiner from "../../components/BorderContainer.style";
 import ChartTitle from "../../components/ChartTitle.styled";
 import RacingBarChart from "./RacingBarChart";
+import { ResponseState, actions } from "./AtiveStatusSlice";
+import ChartContainer from "../../components/CharContainer";
 
 const RacingBarChartWrapper: React.FC = () => {
   const dispatch = useDispatch();
 
-  // const activeStatus = useSelector((state: RootState) =>
-  //   activeStatusMapper.map(([title, stateType]) => {
-  //   })
-  // );
+  const activeStatusMapper: [keyof ResponseState, string][] = [
+    ["activeDBConnection", "DBC"],
+    ["activeHttpCall", "HTTPC"],
+    ["activeMethod", "METHOD"],
+    ["activeSQL", "SQL"],
+    ["activeSocket", "SOCKET"],
+  ];
 
-  const dispatchFetchRequest = () => {};
+  const activeStatus = useSelector((state: RootState) =>
+    activeStatusMapper.map(([stateType, title]) => ({
+      value: state.activeStatus.data[stateType],
+      title,
+    }))
+  );
 
   useEffect(() => {
-    dispatchFetchRequest();
+    dispatch(actions.fetchActiveStatus());
     const intervalId = setInterval(() => {
-      dispatchFetchRequest();
+      dispatch(actions.fetchActiveStatus());
     }, 10000);
     return () => clearInterval(intervalId);
   }, []);
 
   return (
     <BorderConatiner>
-      <ChartTitle>액티브 스테이터스</ChartTitle>
-      {/* <RacingBarChart activeStatus={activeStatus} /> */}
+      <ChartContainer>
+        <ChartTitle>액티브 스테이터스</ChartTitle>
+        <RacingBarChart activeStatus={activeStatus} />
+      </ChartContainer>
     </BorderConatiner>
   );
 };

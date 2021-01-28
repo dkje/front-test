@@ -3,15 +3,25 @@
     overflow: visible;
     width: 100%;
     heihgt: 100%;
-  }
 
-  .bar {
-    fill: orange;
-    cursor: pointer;
-  }
+    .bar,
+    .bar_tail {
+      cursor: pointer;
+      fill-opacity: 0.7;
+    }
 
-  .label {
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 0.7rem;
+    .label {
+      fill: rgba(0, 0, 0, 0.8);
+      font-size: 1.2rem;
+    }
+
+    .yAxis {
+      stroke: rgba(0, 0, 0, 0.5);
+      stroke-width: 0.1;
+    }
+
+    .yAxis text {
+      font-size: 1.2rem;
+    }
   }
 }
