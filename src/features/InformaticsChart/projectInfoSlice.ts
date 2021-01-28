@@ -57,7 +57,7 @@ const projectInfoSlice = createSlice({
     },
     [fetchProjectInfo.fulfilled.type]: (
       state: ProjectInfoState,
-      { payload }: PayloadAction<SpotResponse<ResponseState>[]>
+      { payload }: PayloadAction<SpotResponse<Apis>[]>
     ) => {
       for (let response of payload) {
         if (!response.value) continue;

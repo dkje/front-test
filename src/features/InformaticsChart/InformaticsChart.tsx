@@ -34,7 +34,9 @@ const InformaticsChart: React.FC = () => {
           <List>
             <ListItem>
               {title}
-              <ListItemDesc>{projectInfo.data[key]}</ListItemDesc>
+              <ListItemDesc>
+                {projectInfo.data[key] !== null ? projectInfo.data[key] : "-"}
+              </ListItemDesc>
             </ListItem>
           </List>
         );
