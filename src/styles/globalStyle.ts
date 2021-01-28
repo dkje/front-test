@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
       return css`
         * {
           box-sizing: border-box;
+          margin: 0;
+          padding: 0;
         }
 
         html,
@@ -25,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
           font-family: ${theme.fontFamily.base};
           font-weight: ${theme.fontWeight.normal};
           font-size: ${theme.fontSize.base};
-          background-color: ${theme.colors.grey10};
+          background-color: ${theme.colors.grey20};
         }
       `;
     }}

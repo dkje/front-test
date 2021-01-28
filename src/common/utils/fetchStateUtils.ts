@@ -1,37 +1,27 @@
 import { createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api/api";
-import { SpotResponseState, SpotResponse } from "../../features/type";
+import { SpotData, SpotResponse } from "../../features/type";
 
-export const setFetchStateSccuess = (state: SpotResponseState) => {
-  state.loading = false;
-  state.error = null;
-};
-
-export const setDataFetchFails = (state: SpotResponseState) => {
-  state.loading = false;
-  state.error = "fetch Error 발생, data update되지 않음";
-};
-
-export const createThunkReducers = (thunk: any) => {
-  return {
-    [thunk.pending.type]: (state: SpotResponseState) => {
-      // fetch 시작 전
-      state.loading = true;
-    },
-    [thunk.fulfilled.type]: (
-      state: SpotResponseState,
-      { payload }: PayloadAction<SpotResponse>
-    ) => {
-      //fetch 성공시
-      setFetchStateSccuess(state);
-      state.data = payload;
-    },
-    [thunk.rejected.type]: (state: SpotResponseState) => {
-      //fatch 실패시
-      setDataFetchFails(state);
-    },
-  };
-};
+// export const createThunkReducers = (thunk: any) => {
+//   return {
+//     [thunk.pending.type]: (state: SpotResponseState) => {
+//       // fetch 시작 전
+//       state.loading = true;
+//     },
+//     [thunk.fulfilled.type]: (
+//       state: SpotResponseState,
+//       { payload }: PayloadAction<SpotResponse>
+//     ) => {
+//       //fetch 성공시
+//       setFetchStateSccuess(state);
+//       state.data = payload;
+//     },
+//     [thunk.rejected.type]: (state: SpotResponseState) => {
+//       //fatch 실패시
+//       setDataFetchFails(state);
+//     },
+//   };
+// };
 
 export const createSpotThunkWithThrottle = ({
   reducerName,

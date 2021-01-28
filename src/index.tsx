@@ -6,6 +6,7 @@ import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { LightTheme, BaseProvider } from "baseui";
 import theme from "./styles/theme";
+import GlobalStyle from "./styles/globalStyle";
 import App from "./app/App";
 import store from "./app/store";
 import reportWebVitals from "./reportWebVitals";
@@ -18,6 +19,7 @@ ReactDOM.render(
       <StyletronProvider value={engine}>
         <BaseProvider theme={LightTheme}>
           <ThemeProvider theme={theme}>
+            <GlobalStyle />
             <App />
           </ThemeProvider>
         </BaseProvider>

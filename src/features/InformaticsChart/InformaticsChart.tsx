@@ -1,30 +1,18 @@
 import React, { useEffect } from "react";
-import { ListItem } from "baseui/list";
-import ListItemLabel from "../../components/ListItem.style";
+import { List, ListItem, ListItemDesc } from "../../components/List.style";
 import { useDispatch, useSelector } from "react-redux";
-import { actions as inactAgentActions } from "./inactAgentSlice";
-import { actions as hostActions } from "./hostSlice";
-import { actions as cpuCoreActions } from "./cpuCoreSlice";
-import { actions as rtimeActions } from "./rtimeSlice";
+import { actions, ResponseState } from "./projectInfoSlice";
 import { RootState } from "../../app/rootReducer";
+import BorderConatiner from "../../components/BorderContainer.style";
 
 const InformaticsChart: React.FC = () => {
   const dispatch = useDispatch();
-  const { inactAgent, host, cpuCore, rtime } = useSelector(
-    (state: RootState) => state
-  );
-
-  const dispatchFetchActions = () => {
-    dispatch(inactAgentActions.fetchInactAgent());
-    dispatch(hostActions.fetchHost());
-    dispatch(cpuCoreActions.fetchCpuCore());
-    dispatch(rtimeActions.fetchRtime());
-  };
+  const projectInfo = useSelector(({ projectInfo }: RootState) => projectInfo);
 
   useEffect(() => {
-    dispatchFetchActions();
+    dispatch(actions.fetchProjectInfo());
     const intervalId = setInterval(() => {
-      dispatchFetchActions();
+      dispatch(actions.fetchProjectInfo());
     }, 5000);
 
     return () => {
@@ -32,18 +20,26 @@ const InformaticsChart: React.FC = () => {
     };
   }, []);
 
+  const stateKeyWithTitle: [keyof ResponseState, string][] = [
+    ["cpuCore", "CPU 코어"],
+    ["host", "HOSTS"],
+    ["inactAgent", "비활성 애플리케이션"],
+    ["rtime", "레이턴시"],
+  ];
+
   return (
-    <>
-      {[inactAgent, host, cpuCore, rtime].map((response, i) => {
+    <BorderConatiner>
+      {stateKeyWithTitle.map(([key, title]) => {
         return (
-          <ListItem>
-            <ListItemLabel key={i} description={response.data?.data}>
-              {response.data?.name}
-            </ListItemLabel>
-          </ListItem>
+          <List>
+            <ListItem>
+              {title}
+              <ListItemDesc>{projectInfo.data[key]}</ListItemDesc>
+            </ListItem>
+          </List>
         );
       })}
-    </>
+    </BorderConatiner>
   );
 };
 
