@@ -56,7 +56,9 @@ const getOpenApi = (type: keyof typeof OPEN_API) => async (
   if (!(key in OPEN_API[type])) {
     return "잘못된 API 정보";
   }
-  const url = [OPEN_API_ROOT, type, key].join("/");
+  const url = [OPEN_API_ROOT, type, key]
+    .filter((el) => el.length > 0)
+    .join("/");
   const name = OPEN_API[type][key];
 
   const response = await fetch(getPath(url, param), {
