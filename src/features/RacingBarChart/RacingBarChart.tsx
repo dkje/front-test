@@ -1,6 +1,6 @@
 import "./style.scss";
 import React, { useEffect, useRef } from "react";
-import useResizeObserver from "../../common/hooks/useResizeObserver";
+import useResizeObserver from "common/hooks/useResizeObserver";
 import { select, scaleLinear, scaleBand, active } from "d3";
 
 type Status = {

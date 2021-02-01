@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { RootState } from "../../app/rootReducer";
+import { RootState } from "app/rootReducer";
 import { useDispatch, useSelector } from "react-redux";
-import BorderConatiner from "../../components/BorderContainer.style";
-import ChartTitle from "../../components/ChartTitle.styled";
+import BorderConatiner from "components/BorderContainer.style";
+import ChartTitle from "components/ChartTitle.styled";
 import RacingBarChart from "./RacingBarChart";
 import { ResponseState, actions } from "./AtiveStatusSlice";
-import ChartContainer from "../../components/CharContainer";
+import ChartContainer from "components/CharContainer";
 
 const RacingBarChartWrapper: React.FC = () => {
   const dispatch = useDispatch();

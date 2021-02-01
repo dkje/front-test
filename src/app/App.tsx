@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import api from "../api/api";
-import InformaticsChart from "../features/InformaticsChart/InformaticsChart";
-import RacingBarChartWrapper from "../features/RacingBarChart/RacingBarChartWrapper";
+import api from "api/api";
+import InformaticsChart from "features/InformaticsChart/InformaticsChart";
+import RacingBarChartWrapper from "features/RacingBarChart/RacingBarChartWrapper";
 const HOUR = 1000 * 60 * 60;
 function App() {
   const [actAgent, setActAgent] = useState<any>();
