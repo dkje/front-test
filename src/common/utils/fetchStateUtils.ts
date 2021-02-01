@@ -1,6 +1,6 @@
 import { createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import api from "../../api/api";
-import { SpotData, SpotResponse } from "../../features/type";
+import api from "api/api";
+import { SpotData, SpotResponse } from "features/type";
 
 // export const createThunkReducers = (thunk: any) => {
 //   return {

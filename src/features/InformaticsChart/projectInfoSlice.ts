@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import api from "../../api/api";
+import api from "api/api";
 import { SpotResponse } from "../type";
 
 export interface ResponseState {

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { List, ListItem, ListItemDesc } from "../../components/List.style";
+import { List, ListItem, ListItemDesc } from "components/List.style";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, ResponseState } from "./projectInfoSlice";
-import { RootState } from "../../app/rootReducer";
-import BorderConatiner from "../../components/BorderContainer.style";
+import { RootState } from "app/rootReducer";
+import BorderConatiner from "components/BorderContainer.style";
 
 const InformaticsChart: React.FC = () => {
   const dispatch = useDispatch();
