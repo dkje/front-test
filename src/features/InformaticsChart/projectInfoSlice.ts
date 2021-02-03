@@ -1,32 +1,26 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "api/api";
-import { SpotResponse } from "../type";
+import { SpotInnerStateOrNull, SpotResponse } from "../type";
 
-export interface ResponseState {
-  cpuCore: null | number;
-  host: null | number;
-  inactAgent: null | number;
-  rtime: null | number;
+export interface ProjectInfoState {
+  cpuCore: SpotInnerStateOrNull;
+  host: SpotInnerStateOrNull;
+  inactAgent: SpotInnerStateOrNull;
+  rtime: SpotInnerStateOrNull;
 }
 
-interface ProjectInfoState {
-  loading: boolean;
-  data: ResponseState;
-}
+const singleInitialValue = { value: null, lastTime: Date.now(), error: false };
 
 export const initialState: ProjectInfoState = {
-  loading: false,
-  data: {
-    cpuCore: null,
-    host: null,
-    inactAgent: null,
-    rtime: null,
-  },
+  cpuCore: { ...singleInitialValue },
+  host: { ...singleInitialValue },
+  inactAgent: { ...singleInitialValue },
+  rtime: { ...singleInitialValue },
 };
 
 type Apis = "cpucore" | "host" | "inact_agent" | "rtime";
 
-const apisMapping: [Apis, keyof ResponseState][] = [
+const apisMapping: [Apis, keyof ProjectInfoState][] = [
   ["cpucore", "cpuCore"],
   ["host", "host"],
   ["inact_agent", "inactAgent"],
@@ -52,29 +46,38 @@ const projectInfoSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: {
-    [fetchProjectInfo.pending.type]: (state: ProjectInfoState) => {
-      state.loading = true;
-    },
+    [fetchProjectInfo.pending.type]: (state: ProjectInfoState) => {},
     [fetchProjectInfo.fulfilled.type]: (
       state: ProjectInfoState,
-      { payload }: PayloadAction<SpotResponse<Apis>[]>
+      { payload }: PayloadAction<SpotResponse[]>
     ) => {
       for (let response of payload) {
-        if (!response.value) continue;
         const stateType = apisMapping.find(
           ([key]) => key === response.value?.key
         );
-        if (stateType) state.data[stateType[1]] = response.value.data;
+
+        if (!stateType || !response.value) continue;
+        const stateOfResponse = state[stateType[1]];
+        if (!stateOfResponse) continue;
+
+        if (response.value.error) {
+          stateOfResponse.error = true;
+          stateOfResponse.statusCode = response.value.statusCode;
+        } else {
+          stateOfResponse.error = false;
+          stateOfResponse.value = response.value.data;
+          stateOfResponse.statusCode = undefined;
+        }
+
+        stateOfResponse.lastTime = response.value.lastTime;
       }
-      state.loading = false;
     },
     [fetchProjectInfo.rejected.type]: (
       state: ProjectInfoState,
-      { payload }: PayloadAction<SpotResponse<ResponseState>[]>
+      { payload }: PayloadAction<SpotResponse[]>
     ) => {
       console.log("projectInfoFetch Error");
       console.log(payload);
-      state.loading = false;
     },
   },
 });

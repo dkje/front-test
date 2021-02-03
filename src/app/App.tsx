@@ -23,9 +23,6 @@ function App() {
       <InformaticsChart />
       <RacingBarChartWrapper />
       <h2>프로젝트 API 예시</h2>
-      <h3>Spot 정보 조회 URL</h3>
-      <pre>{JSON.stringify(actAgent, null, 4)}</pre>
-      <hr />
       <h3>통계 정보 조회 URL</h3>
       <pre>{JSON.stringify(httpcSeries, null, 4)}</pre>
     </div>

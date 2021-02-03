@@ -45,28 +45,63 @@ const getPath = (url: string, param: Record<string, any> = {}) => {
   for (let key in param) {
     path = path.replace(new RegExp("\\{" + key + "\\}", "g"), param[key]);
   }
-
   return path;
 };
+
+const throttled: Record<string, boolean> = {};
 
 const getOpenApi = (type: keyof typeof OPEN_API) => async (
   key: keyof typeof OPEN_API[typeof type],
   param?: Record<string, any>
 ) => {
-  if (!(key in OPEN_API[type])) {
-    return "잘못된 API 정보";
+  try {
+    if (!(key in OPEN_API[type]))
+      return {
+        error: true,
+        key,
+        lastTime: Date.now(),
+        message: "잘못된 API 정보",
+      };
+
+    if (throttled[key])
+      return {
+        error: true,
+        key,
+        lastTime: Date.now(),
+        message: "Trottle 대기 중",
+      };
+
+    throttled[key] = true;
+
+    const url = [OPEN_API_ROOT, type, key]
+      .filter((el) => el.length > 0)
+      .join("/");
+    const name = OPEN_API[type][key];
+
+    const response = await fetch(getPath(url, param), {
+      headers: OPEN_API_HEADERS,
+    });
+
+    if (response.status >= 300 && response.status < 600) {
+      return {
+        error: true,
+        key,
+        statusCode: response.status,
+        lastTime: Date.now(),
+      };
+    }
+
+    console.log("잘넘어감!!!!!");
+    const data = await response.json();
+    return { error: false, key, name, data, lastTime: Date.now() };
+  } catch (error) {
+    console.log("핸들링되지 않은 에러");
+    console.log(error);
+  } finally {
+    setTimeout(() => {
+      throttled[key] = false;
+    }, 3000);
   }
-  const url = [OPEN_API_ROOT, type, key]
-    .filter((el) => el.length > 0)
-    .join("/");
-  const name = OPEN_API[type][key];
-
-  const response = await fetch(getPath(url, param), {
-    headers: OPEN_API_HEADERS,
-  });
-  const data = await response.json();
-
-  return { key, name, data };
 };
 
 const spot = getOpenApi("");

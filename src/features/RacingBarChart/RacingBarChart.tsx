@@ -1,11 +1,11 @@
-import "./style.scss";
 import React, { useEffect, useRef } from "react";
 import useResizeObserver from "common/hooks/useResizeObserver";
-import { select, scaleLinear, scaleBand, active } from "d3";
+import { select, scaleLinear, scaleBand } from "d3";
+import ChartContainer from "./components/ChartContainer";
 
 type Status = {
   title: string;
-  value: number | null;
+  value: number;
 };
 
 const colors = [
@@ -93,7 +93,8 @@ const RacingBarChart: React.FC<{ activeStatus: Status[] }> = ({
       .join("text")
       .text((entry) => entry.value)
       .attr("class", "label")
-      .attr("x", 5)
+      .attr("text-anchor", "end")
+      .attr("x", 10)
       .attr("height", yScale.bandwidth())
       .attr("y", (entry: { title: string }) => {
         const y = yScale(entry.title);
@@ -103,9 +104,9 @@ const RacingBarChart: React.FC<{ activeStatus: Status[] }> = ({
   }, [activeStatus, dimensions]);
 
   return (
-    <div ref={chartContainer} className="racing_chart_container">
+    <ChartContainer ref={chartContainer} className="racing_chart_container">
       <svg ref={svgRef}></svg>
-    </div>
+    </ChartContainer>
   );
 };
 
