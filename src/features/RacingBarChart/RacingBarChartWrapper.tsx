@@ -4,13 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import BorderConatiner from "components/BorderContainer.style";
 import ChartTitle from "components/ChartTitle.styled";
 import RacingBarChart from "./RacingBarChart";
-import { ResponseState, actions } from "./AtiveStatusSlice";
+import { ActiveStatusState, actions } from "./AtiveStatusSlice";
 import ChartContainer from "components/CharContainer";
+import ChartErrorWrapper from "components/ChartErrorWrapper";
+import ServerErrorFooter from "components/ErrorFooter";
+import useCheckResponseStatus from "common/hooks/useCheckResponseStatus";
 
 const RacingBarChartWrapper: React.FC = () => {
   const dispatch = useDispatch();
 
-  const activeStatusMapper: [keyof ResponseState, string][] = [
+  const activeStatusMapper: [keyof ActiveStatusState, string][] = [
     ["activeDBConnection", "DBC"],
     ["activeHttpCall", "HTTPC"],
     ["activeMethod", "METHOD"],
@@ -20,9 +23,14 @@ const RacingBarChartWrapper: React.FC = () => {
 
   const activeStatus = useSelector((state: RootState) =>
     activeStatusMapper.map(([stateType, title]) => ({
-      value: state.activeStatus.data[stateType],
+      value: state.activeStatus[stateType]?.value ?? 0,
       title,
+      status: state.activeStatus[stateType].statusCode,
     }))
+  );
+
+  const { isServerError, isRequestError } = useCheckResponseStatus(
+    activeStatus
   );
 
   useEffect(() => {
@@ -37,7 +45,11 @@ const RacingBarChartWrapper: React.FC = () => {
     <BorderConatiner>
       <ChartContainer>
         <ChartTitle>액티브 스테이터스</ChartTitle>
-        <RacingBarChart activeStatus={activeStatus} />
+        <ChartErrorWrapper>
+          <RacingBarChart activeStatus={activeStatus} />
+        </ChartErrorWrapper>
+        {isServerError && <ServerErrorFooter type={"ServerError"} />}
+        {isRequestError && <ServerErrorFooter type={"RequestError"} />}
       </ChartContainer>
     </BorderConatiner>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { List, ListItem, ListItemDesc } from "components/List.style";
 import { useDispatch, useSelector } from "react-redux";
-import { actions, ResponseState } from "./projectInfoSlice";
+import { actions, ProjectInfoState } from "./projectInfoSlice";
 import { RootState } from "app/rootReducer";
 import BorderConatiner from "components/BorderContainer.style";
 
@@ -20,7 +20,7 @@ const InformaticsChart: React.FC = () => {
     };
   }, []);
 
-  const stateKeyWithTitle: [keyof ResponseState, string][] = [
+  const stateKeyWithTitle: [keyof ProjectInfoState, string][] = [
     ["cpuCore", "CPU 코어"],
     ["host", "HOSTS"],
     ["inactAgent", "비활성 애플리케이션"],
@@ -32,10 +32,10 @@ const InformaticsChart: React.FC = () => {
       {stateKeyWithTitle.map(([key, title]) => {
         return (
           <List>
-            <ListItem>
+            <ListItem key={key}>
               {title}
               <ListItemDesc>
-                {projectInfo.data[key] !== null ? projectInfo.data[key] : "-"}
+                {projectInfo[key] !== null ? projectInfo[key]?.value : "-"}
               </ListItemDesc>
             </ListItem>
           </List>
