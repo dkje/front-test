@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from "react";
-
-import api from "api/api";
+import React from "react";
 import InformaticsChart from "features/InformaticsChart/InformaticsChart";
 import RacingBarChartWrapper from "features/RacingBarChart/RacingBarChartWrapper";
-const HOUR = 1000 * 60 * 60;
+import LineChartWrapper from "features/LineChart/LineChartWrapper";
+
 function App() {
-  const [actAgent, setActAgent] = useState<any>();
-  const [httpcSeries, setHttpcSeries] = useState<any>();
-
-  useEffect(() => {
-    api.spot("inact_agent").then((result) => setActAgent(result));
-    api
-      .series("exception/{stime}/{etime}", {
-        stime: Date.now() - HOUR,
-        etime: Date.now(),
-      })
-      .then((result) => setHttpcSeries(result));
-  }, []);
-
   return (
     <div style={{ padding: 20 }}>
-      <InformaticsChart />
-      <RacingBarChartWrapper />
-      <h2>프로젝트 API 예시</h2>
-      <h3>통계 정보 조회 URL</h3>
-      <pre>{JSON.stringify(httpcSeries, null, 4)}</pre>
+      {/* <InformaticsChart /> */}
+      {/* <RacingBarChartWrapper /> */}
+      <LineChartWrapper />
     </div>
   );
 }

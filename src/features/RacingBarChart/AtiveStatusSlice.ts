@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "api/api";
-import { SpotInnerStateOrNull, SpotResponse } from "../type";
+import { SpotInnerState, SpotResponse } from "../type";
 
 export interface ActiveStatusState {
-  activeMethod: SpotInnerStateOrNull;
-  activeSQL: SpotInnerStateOrNull;
-  activeHttpCall: SpotInnerStateOrNull;
-  activeDBConnection: SpotInnerStateOrNull;
-  activeSocket: SpotInnerStateOrNull;
+  activeMethod: SpotInnerState;
+  activeSQL: SpotInnerState;
+  activeHttpCall: SpotInnerState;
+  activeDBConnection: SpotInnerState;
+  activeSocket: SpotInnerState;
 }
 
 const singleInitialValue = { value: null, lastTime: Date.now(), error: false };

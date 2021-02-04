@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const useCheckResponseStatus = (activeStatus: { status?: number }[]) => {
+const useCheckResponseStatus = (activeStatus: { statusCode?: number }[]) => {
   const [isServerError, setIsServerError] = useState<boolean>(false);
   const [isRequestError, setIsRequestError] = useState<boolean>(false);
 
@@ -8,11 +8,11 @@ const useCheckResponseStatus = (activeStatus: { status?: number }[]) => {
     let isRequestErrorContains = false;
     let isServerErrorContains = false;
     activeStatus.forEach((el) => {
-      if (!el.status) return;
-      if (el.status >= 500 && el.status < 600) {
+      if (!el.statusCode) return;
+      if (el.statusCode >= 500 && el.statusCode < 600) {
         isServerErrorContains = true;
       }
-      if (el.status >= 400 && el.status < 500) {
+      if (el.statusCode >= 400 && el.statusCode < 500) {
         isRequestErrorContains = true;
       }
       setIsServerError(isServerErrorContains);

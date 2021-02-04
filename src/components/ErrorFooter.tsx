@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 const Container = styled.div`
   ${({ theme }) => {
     return css`
+      margin-top: 2rem;
       width: 100%;
       padding: 1rem 2rem;
       background-color: ${theme.colors.purple};

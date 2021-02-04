@@ -6,6 +6,7 @@ export interface SpotResponse {
   value?: Unpack<ReturnType<typeof api.spot>>;
   reason?: Error;
 }
+export type SeriseResponse = Unpack<ReturnType<typeof api.series>>;
 
 export interface SpotInnerState {
   value: number | null;
@@ -14,4 +15,9 @@ export interface SpotInnerState {
   statusCode?: number;
 }
 
-export type SpotInnerStateOrNull = SpotInnerState;
+export interface SeriseState<T> {
+  value: T | null;
+  error: boolean;
+  lastTime: number;
+  statusCode?: number;
+}

@@ -36,7 +36,9 @@ const OPEN_API: OPEN_API_IFC = {
     act_socket: "액티브 Socket 수",
   },
   json: {
-    "exception/{stime}/{etime}": "Exception 발생 ",
+    "exception/{stime}/{etime}": "Exception 발생",
+    "thread_count/{stime}/{etime}": "Thread 수",
+    "visitor_5m/{stime}/{etime}": "액티브 사용자(5m)",
   },
 };
 
@@ -91,7 +93,6 @@ const getOpenApi = (type: keyof typeof OPEN_API) => async (
       };
     }
 
-    console.log("잘넘어감!!!!!");
     const data = await response.json();
     return { error: false, key, name, data, lastTime: Date.now() };
   } catch (error) {
