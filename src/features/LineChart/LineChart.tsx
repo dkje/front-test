@@ -12,6 +12,7 @@ import {
   select,
 } from "d3";
 import moment from "moment";
+import ChartErrorWrapper from "components/ChartErrorWrapper";
 
 interface LineChartProps {
   data: { today: [number, number][]; yesterday: [number, number][] };
@@ -93,12 +94,15 @@ const LineChart: React.FC<LineChartProps> = ({ data, id }) => {
       .attr("transform", `translate(35,0)`)
       .call(yAxis);
 
-    const xAxis = axisBottom(xScale).tickValues([
-      "01:00",
-      "06:00",
-      "12:00",
-      "18:00",
-    ]);
+    const xAxis = axisBottom(xScale).tickValues(
+      ["03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"].filter(
+        (el, i) => {
+          if (width > 700) return true;
+          if (width > 500) return i % 2 === 0;
+          if (width > 200) return i % 3 === 0;
+        }
+      )
+    );
     svg.select(".x-axis").remove();
     svg
       .append("g")
@@ -108,12 +112,14 @@ const LineChart: React.FC<LineChartProps> = ({ data, id }) => {
   }, [dimensions, data]);
 
   return (
-    <ChartContainer ref={chartContainer} id={id}>
-      <svg ref={svgRef}>
-        <g className="x-axis" />
-        <g className="y-axis" />
-      </svg>
-    </ChartContainer>
+    <ChartErrorWrapper>
+      <ChartContainer ref={chartContainer} id={id}>
+        <svg ref={svgRef}>
+          <g className="x-axis" />
+          <g className="y-axis" />
+        </svg>
+      </ChartContainer>
+    </ChartErrorWrapper>
   );
 };
 
