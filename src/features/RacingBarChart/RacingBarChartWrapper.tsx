@@ -25,7 +25,7 @@ const RacingBarChartWrapper: React.FC = () => {
     activeStatusMapper.map(([stateType, title]) => ({
       value: state.activeStatus[stateType]?.value ?? 0,
       title,
-      status: state.activeStatus[stateType].statusCode,
+      statusCode: state.activeStatus[stateType].statusCode,
     }))
   );
 
