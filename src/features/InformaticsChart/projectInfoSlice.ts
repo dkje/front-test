@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "api/api";
-import { SpotInnerStateOrNull, SpotResponse } from "../type";
+import { SpotInnerState, SpotResponse } from "../type";
 
 export interface ProjectInfoState {
-  cpuCore: SpotInnerStateOrNull;
-  host: SpotInnerStateOrNull;
-  inactAgent: SpotInnerStateOrNull;
-  rtime: SpotInnerStateOrNull;
+  cpuCore: SpotInnerState;
+  host: SpotInnerState;
+  inactAgent: SpotInnerState;
+  rtime: SpotInnerState;
 }
 
 const singleInitialValue = { value: null, lastTime: Date.now(), error: false };
