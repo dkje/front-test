@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "api/api";
 import { SeriseResponse, SeriseState } from "features/type";
+import moment from "moment";
 
 interface ActiveVisitors5mState {
   today: [number, number][];
@@ -68,7 +69,7 @@ const activeVisitorsSlice = createSlice({
 
       // false:
       // etime과 total를 가져온 데이터만큼 추가한다
-      state.value!.today = [...state.value!.today, payload.data.data];
+      state.value!.today = [...state.value!.today, ...payload.data.data];
       state.value!.total += payload.data.total;
     },
   },

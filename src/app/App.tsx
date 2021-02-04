@@ -6,8 +6,8 @@ import LineChartWrapper from "features/LineChart/LineChartWrapper";
 function App() {
   return (
     <div style={{ padding: 20 }}>
-      {/* <InformaticsChart /> */}
-      {/* <RacingBarChartWrapper /> */}
+      <InformaticsChart />
+      <RacingBarChartWrapper />
       <LineChartWrapper />
     </div>
   );

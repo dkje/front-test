@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export default styled.div`
   ${({ theme, id }) => {
     return css`
+      margin-bottom: 2.5rem;
       svg {
         width: 100%;
         height: 100%;
@@ -28,6 +29,10 @@ export default styled.div`
         .${id}_yesterday {
           stroke: #4b4b4b;
           fill: none;
+        }
+
+        text {
+          font-size: 1.2rem;
         }
       }
     `;
