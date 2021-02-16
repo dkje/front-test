@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "api/api";
+import { awiatAnotherFetchDone } from "common/utils/awaitAnoterFecthDone";
+import { setLastFetchTime } from "common/utils/setLastFetchTime";
 import { SpotInnerState, SpotResponse } from "../type";
 
 export interface ActiveStatusState {

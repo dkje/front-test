@@ -1,3 +1,6 @@
+import { awiatAnotherFetchDone } from "common/utils/awaitAnoterFecthDone";
+import { setLastFetchTime } from "common/utils/setLastFetchTime";
+
 const DEMO_PROJECT_API_TOCKEN = "XGJHUSQZTI2AVIENWA27HI5V";
 const DEMO_PROJECT_CODE = "5490";
 const OPEN_API_HEADERS = {
@@ -79,6 +82,9 @@ const getOpenApi = (type: keyof typeof OPEN_API) => async (
       .filter((el) => el.length > 0)
       .join("/");
     const name = OPEN_API[type][key];
+
+    await awiatAnotherFetchDone();
+    setLastFetchTime();
 
     const response = await fetch(getPath(url, param), {
       headers: OPEN_API_HEADERS,
