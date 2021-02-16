@@ -31,8 +31,8 @@ const InformaticsChart: React.FC = () => {
     <BorderConatiner>
       {stateKeyWithTitle.map(([key, title]) => {
         return (
-          <List>
-            <ListItem key={key}>
+          <List key={key}>
+            <ListItem>
               {title}
               <ListItemDesc>
                 {projectInfo[key] !== null ? projectInfo[key]?.value : "-"}
