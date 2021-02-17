@@ -5,7 +5,7 @@ import BorderConatiner from "components/BorderContainer.style";
 import ChartTitle from "components/ChartTitle.styled";
 import RacingBarChart from "./RacingBarChart";
 import { ActiveStatusState, actions } from "./AtiveStatusSlice";
-import ChartContainer from "components/CharContainer";
+import ChartContainer from "components/ChartContainer";
 import ChartErrorWrapper from "components/ChartErrorWrapper";
 import ServerErrorFooter from "components/ErrorFooter";
 import useCheckResponseStatus from "common/hooks/useCheckResponseStatus";

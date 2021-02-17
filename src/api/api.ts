@@ -68,13 +68,14 @@ const getOpenApi = (type: keyof typeof OPEN_API) => async (
         message: "잘못된 API 정보",
       };
 
-    if (throttled[key])
+    if (throttled[key]) {
       return {
         error: true,
         key,
         lastTime: Date.now(),
         message: "Trottle 대기 중",
       };
+    }
 
     throttled[key] = true;
 
