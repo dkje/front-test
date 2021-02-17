@@ -75,10 +75,10 @@ const Label: React.FC<LabelProps> = ({ data, align = "left", ...position }) => {
         right={position.right}
       >
         {data.map(({ title, content }) => (
-          <>
+          <div key={title}>
             <Title>{title}</Title>
             <Content>{content}</Content>
-          </>
+          </div>
         ))}
       </Container>
     </>
