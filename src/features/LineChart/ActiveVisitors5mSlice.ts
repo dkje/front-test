@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "api/api";
-import { awiatAnotherFetchDone } from "common/utils/awaitAnoterFecthDone";
-import { setLastFetchTime } from "common/utils/setLastFetchTime";
 import { SeriseResponse, SeriseState } from "features/type";
-import moment from "moment";
 
 interface ActiveVisitors5mState {
   today: [number, number][];
@@ -24,11 +21,8 @@ const activeVisitors5mName = "activeVisitors5m";
 
 const fetchActiveVisitors = createAsyncThunk(
   `${activeVisitors5mName}/fetchActiveVisitors5m`,
-  async ({ stime, etime }: { stime: number; etime: number }) => {
-    const payload = await api.series("visitor_5m/{stime}/{etime}", {
-      stime,
-      etime,
-    });
+  async (time: { stime: number; etime: number }) => {
+    const payload = await api.series("visitor_5m/{stime}/{etime}", time);
     return payload;
   }
 );

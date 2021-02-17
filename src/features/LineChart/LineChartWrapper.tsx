@@ -6,7 +6,7 @@ import moment from "moment";
 import ChartTitle from "components/ChartTitle.styled";
 import LineChart from "./LineChart";
 import BorderConatiner from "components/BorderContainer.style";
-import ChartContainer from "components/CharContainer";
+import ChartContainer from "components/ChartContainer";
 import ErrorFooter from "components/ErrorFooter";
 import useCheckResponseStatus from "common/hooks/useCheckResponseStatus";
 import ChartErrorWrapper from "components/ChartErrorWrapper";

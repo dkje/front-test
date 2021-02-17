@@ -5,7 +5,7 @@ const List = styled.ul<{ variable: string }>`
   ${({ theme, variable }) => {
     return css`
       display: flex;
-      flex-direction: ${variable};
+      flex-direction: column;
       justify-content: end;
     `;
   }}
@@ -18,6 +18,7 @@ const ListItem = styled.li<{ color: string }>`
       align-items: center;
       font-size: 1.4rem;
       margin-left: 1rem;
+      margin-bottom: 0.5rem;
       div {
         margin-right: 0.5rem;
         width: 1rem;
@@ -30,13 +31,13 @@ const ListItem = styled.li<{ color: string }>`
 
 interface DataInfoListProps {
   data: { color: string; name: string }[];
-  variable?: "horizontal" | "vertical";
+  variable?: "row" | "column";
   position?: "left" | "right";
 }
 
 const DataInfoList: React.FC<DataInfoListProps> = ({
   data,
-  variable = "horizontal",
+  variable = "row",
   position = "left",
 }) => {
   return (
