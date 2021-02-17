@@ -2,7 +2,7 @@ import React from "react";
 import InformaticsChart from "features/InformaticsChart/InformaticsChart";
 import RacingBarChartWrapper from "features/RacingBarChart/RacingBarChartWrapper";
 import LineChartWrapper from "features/LineChart/LineChartWrapper";
-import StackBarChartWrapper from "features/DounutChart/DonutChartWrapper";
+import StackBarChartWrapper from "features/DonutChart/DonutChartWrapper";
 
 function App() {
   return (

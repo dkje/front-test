@@ -2,7 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import projectInfoSlice from "features/InformaticsChart/projectInfoSlice";
 import activeStatusSlice from "features/RacingBarChart/AtiveStatusSlice";
 import ActiveVisitors5m from "features/LineChart/ActiveVisitors5mSlice";
-import ExpectionSerise from "features/DounutChart/ExecptionSlice";
+import ExpectionSerise from "features/DonutChart/ExecptionSlice";
 
 const rootReducer = combineReducers({
   projectInfo: projectInfoSlice.reducer,
