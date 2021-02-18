@@ -52,8 +52,6 @@ const exceptionSlice = createSlice({
         return;
       }
 
-      if (!!payload.data.length) return;
-
       state.lastTime = payload.lastTime;
 
       for (let data of payload.data.records) {

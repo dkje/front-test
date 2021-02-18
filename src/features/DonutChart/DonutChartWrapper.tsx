@@ -15,7 +15,7 @@ import DataInfoList from "components/DataInfoList";
 import ErrorFooter from "components/ErrorFooter";
 import Label from "components/Label";
 
-const StackBarChartWrapper: React.FC = () => {
+const DonutBarChartWrapper: React.FC = () => {
   const exceptions = useSelector((state: RootState) => state.exceptionSerise);
   const { isServerError, isRequestError } = useCheckResponseStatus([
     exceptions,
@@ -50,4 +50,4 @@ const StackBarChartWrapper: React.FC = () => {
   );
 };
 
-export default StackBarChartWrapper;
+export default DonutBarChartWrapper;

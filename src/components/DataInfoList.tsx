@@ -1,12 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const List = styled.ul<{ variable: string }>`
-  ${({ theme, variable }) => {
+const List = styled.ul<{ variable: string; position: string }>`
+  ${({ theme, variable, position }) => {
     return css`
       display: flex;
-      flex-direction: column;
-      justify-content: end;
+      flex-direction: ${variable};
+      justify-content: ${position};
     `;
   }}
 `;
@@ -32,7 +32,7 @@ const ListItem = styled.li<{ color: string }>`
 interface DataInfoListProps {
   data: { color: string; name: string }[];
   variable?: "row" | "column";
-  position?: "left" | "right";
+  position?: "left" | "right" | "center";
 }
 
 const DataInfoList: React.FC<DataInfoListProps> = ({
@@ -41,7 +41,7 @@ const DataInfoList: React.FC<DataInfoListProps> = ({
   position = "left",
 }) => {
   return (
-    <List variable={variable}>
+    <List variable={variable} position={position}>
       {data.map(({ color, name }) => {
         return (
           <ListItem color={color} key={name}>

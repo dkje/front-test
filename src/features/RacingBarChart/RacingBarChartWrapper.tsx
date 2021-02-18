@@ -1,18 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { RootState } from "app/rootReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import BorderConatiner from "components/BorderContainer.style";
 import ChartTitle from "components/ChartTitle.styled";
 import RacingBarChart from "./RacingBarChart";
-import { ActiveStatusState, actions } from "./AtiveStatusSlice";
+import { ActiveStatusState } from "./AtiveStatusSlice";
 import ChartContainer from "components/ChartContainer";
 import ChartErrorWrapper from "components/ChartErrorWrapper";
 import ServerErrorFooter from "components/ErrorFooter";
 import useCheckResponseStatus from "common/hooks/useCheckResponseStatus";
+import useGetData from "./hook/useGetData";
 
 const RacingBarChartWrapper: React.FC = () => {
-  const dispatch = useDispatch();
-
   const activeStatusMapper: [keyof ActiveStatusState, string][] = [
     ["activeDBConnection", "DBC"],
     ["activeHttpCall", "HTTPC"],
@@ -33,13 +32,7 @@ const RacingBarChartWrapper: React.FC = () => {
     activeStatus
   );
 
-  useEffect(() => {
-    dispatch(actions.fetchActiveStatus());
-    const intervalId = setInterval(() => {
-      dispatch(actions.fetchActiveStatus());
-    }, 10000);
-    return () => clearInterval(intervalId);
-  }, []);
+  useGetData();
 
   return (
     <BorderConatiner>
