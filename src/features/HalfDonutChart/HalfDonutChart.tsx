@@ -73,16 +73,12 @@ const HalfDonutChart: React.FC<GuageChartProps> = ({
       .join("path")
       .attr("fill", colors.background)
       .attr("class", "backArc")
-      .transition()
-      .duration(500)
       .attr("d", backArc);
 
     g.selectAll(".mainArc")
       .data(dataReady)
       .join("path")
       .attr("class", "mainArc")
-      .transition()
-      .duration(500)
       .attr("d", mainArc)
       .attr("fill", (d) => {
         if (d.value > 0.85) {
