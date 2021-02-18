@@ -40,16 +40,13 @@ const DonutChart: React.FC<DonutChartProps> = ({ data, id, colors }) => {
 
     g.selectAll(".arc")
       .data(dataReady)
-      .enter()
-      .append("path")
+      .join("path")
       .attr("class", "arc")
       .attr("d", innerArc)
       .attr("fill", (d, i) => colors[i % colors.length])
       .attr("stroke", "#fff")
       .style("stroke-width", "1.5px")
       .style("opacity", 0.8);
-
-    svg.selectAll(".allLabels").remove();
   }, [data, dimensions]);
 
   return (
@@ -65,4 +62,4 @@ const DonutChart: React.FC<DonutChartProps> = ({ data, id, colors }) => {
   );
 };
 
-export default DonutChart;
+export default React.memo(DonutChart, () => false);
