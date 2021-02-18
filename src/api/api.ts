@@ -42,6 +42,7 @@ const OPEN_API: OPEN_API_IFC = {
     "exception/{stime}/{etime}": "Exception 발생",
     "thread_count/{stime}/{etime}": "Thread 수",
     "visitor_5m/{stime}/{etime}": "액티브 사용자(5m)",
+    "thread_count/{stime}/{etime}/avg": "평균 쓰레드",
   },
 };
 

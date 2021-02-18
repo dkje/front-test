@@ -1,8 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import { actions } from "./ActiveVisitors5mSlice";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "app/rootReducer";
-import moment from "moment";
 import ChartTitle from "components/ChartTitle.styled";
 import LineChart from "./LineChart";
 import BorderConatiner from "components/BorderContainer.style";
@@ -11,53 +9,17 @@ import ErrorFooter from "components/ErrorFooter";
 import useCheckResponseStatus from "common/hooks/useCheckResponseStatus";
 import ChartErrorWrapper from "components/ChartErrorWrapper";
 import DataInfoList from "components/DataInfoList";
+import useGetData from "./hook/useGetData";
 
 const LineChartWrapper = () => {
-  const dispatch = useDispatch();
   const activeVisitor = useSelector((state: RootState) => {
     return state.activeVisitors5m;
   });
-  let nextDay = useRef(moment().add(1, "days").startOf("day").unix() * 1000);
 
   const { isServerError, isRequestError } = useCheckResponseStatus([
     activeVisitor,
   ]);
-
-  useEffect(() => {
-    const intervalId = setTimeout(fetchData, 5000);
-    return () => {
-      clearTimeout(intervalId);
-    };
-  }, [activeVisitor]);
-
-  useEffect(() => {
-    dispatch(
-      actions.fetchActiveVisitors({
-        stime: moment().subtract(1, "days").startOf("day").unix() * 1000,
-        etime: Date.now(),
-      })
-    );
-  }, []);
-
-  function fetchData() {
-    const now = Date.now();
-    if (!activeVisitor.value?.etime || now > nextDay.current) {
-      nextDay.current = moment().add(1, "days").startOf("day").unix() * 1000;
-      return dispatch(
-        actions.fetchActiveVisitors({
-          stime: moment().subtract(1, "days").startOf("day").unix() * 1000,
-          etime: now,
-        })
-      );
-    }
-
-    dispatch(
-      actions.fetchActiveVisitors({
-        stime: activeVisitor.value.etime,
-        etime: now,
-      })
-    );
-  }
+  useGetData();
 
   const lineTypeData = [
     { color: "#236fd3", name: "Today" },
